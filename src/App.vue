@@ -5,6 +5,10 @@
       <router-link to="/about">About</router-link>
     </div>
     <router-view/>
+    <div class="waifu">
+      <div class="waifu-tips"></div>
+      <canvas id="live2d" width="280" height="250" class="live2d"></canvas>
+    </div>
   </div>
 </template>
 
@@ -16,6 +20,7 @@ export default {
     return {}
   },
   mounted () {
+    loadlive2d("live2d", "path/to/model.json");
     axios.post('/api/my').then(res => {
       console.log(res)
     })
