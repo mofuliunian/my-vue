@@ -66,7 +66,7 @@ export default {
     })
     setTimeout(() => {
       this.scorll()
-    }, 300)
+    }, 400)
   }
 }
 </script>
