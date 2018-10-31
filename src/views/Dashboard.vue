@@ -44,7 +44,6 @@ export default {
         overflow: auto;
         position: relative;
     }
-
     .picBox {
         background: url('../assets/1.png') no-repeat 50%;
         background-size: cover;

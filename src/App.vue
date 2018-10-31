@@ -2,6 +2,14 @@
   <div id="app" ref="app">
     <div class="scroll-progress" :style="`width: ${scrollProgressWidth}`"></div>
     <div class="back-to-top" @click="goToTop" :style="`top: ${backTop}`"></div>
+    <header>
+      <div class="header-left">
+        logo
+      </div>
+      <div class="header-right">
+        aaa
+      </div>
+    </header>
     <router-view/>
     <div class="waifu">
       <div class="waifu-tips"></div>
@@ -128,5 +136,23 @@ html,body{
   100% {
      transform: translateY(0);
    }
+}
+header{
+  height: 65px;
+  position: fixed;
+  width: 100%;
+  z-index: 999;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 30px;
+  box-sizing: border-box;
+  .header-left{
+  }
+  .header-right{
+  }
+}
+header:hover{
+  background: rgba(255,255,255,.8);
+  transition: all .4s ease;
 }
 </style>
