@@ -2,13 +2,51 @@
   <div id="app" ref="app">
     <div class="scroll-progress" :style="`width: ${scrollProgressWidth}`"></div>
     <div class="back-to-top" @click="goToTop" :style="`top: ${backTop}`"></div>
-    <header>
+    <header :class="scrollTop === 0 ? '' : 'header-no-top'">
       <div class="header-left">
         logo
       </div>
-      <div class="header-right">
-        aaa
-      </div>
+      <ul class="header-right">
+        <li class="">
+          <router-link to="/">
+            <i class="iconfont icon-shouye"></i>
+            <span>Home</span>
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/">
+            <i class="iconfont icon-boke"></i>
+            <span>Blog</span>
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/">
+            <i class="iconfont icon-archive"></i>
+            <span>Archive</span>
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/">
+            <i class="iconfont icon-yinle"></i>
+            <span>Music</span>
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/">
+            <i class="iconfont icon-APP"></i>
+            <span>Apps</span>
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/">
+            <i class="iconfont icon-gerenjianli"></i>
+            <span>CV</span>
+          </router-link>
+        </li>
+        <li class="search">
+          <i class="iconfont icon-sousuo1"></i>
+        </li>
+      </ul>
     </header>
     <router-view/>
     <div class="waifu">
@@ -20,6 +58,7 @@
 
 <script>
 // import axios from 'axios'
+import '../public/font_898297_8suwilf7nuy/iconfont.css'
 import { mapState } from 'vuex'
 export default {
   name: 'app',
@@ -109,7 +148,7 @@ html,body{
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 2;
+  z-index: 9999;
 }
 
 .back-to-top {
@@ -149,10 +188,32 @@ header{
   .header-left{
   }
   .header-right{
+    font: .8rem Ubuntu,sans-serif;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    li{
+      padding: 0 12px;
+      a{
+        text-decoration: none;
+        color: #666;
+        font-size: 16px;
+        .iconfont{
+          display: inline-block;
+          padding-right: 6px;
+        }
+      }
+    }
+    .search .iconfont{
+      font-size: 22px;
+      color: #666;
+      cursor: pointer;
+    }
   }
 }
-header:hover{
-  background: rgba(255,255,255,.8);
+header:hover, .header-no-top{
+  background: hsla(0,0%,100%,.95);
   transition: all .4s ease;
+  box-shadow: 0 1px 40px -8px rgba(0,0,0,.5);
 }
 </style>

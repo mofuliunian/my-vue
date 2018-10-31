@@ -56,7 +56,7 @@ export default {
     }
     .content{
         background: #fff;
-        height: 1000px;
+        height: 1800px;
         position: relative;
         z-index: 666;
     }
