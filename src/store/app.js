@@ -1,16 +1,17 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import { CHANGECLIENTHEIGHT } from './app_type'
 
-Vue.use(Vuex)
-
-export default new Vuex.Store({
+export default {
   state: {
-
+    clientHeight: 0
   },
   mutations: {
-
+    [CHANGECLIENTHEIGHT] (state, payload) {
+      state.clientHeight = payload.clientHeight
+    }
   },
   actions: {
-
+    changeClientHeight ({ commit }, { payload }) {
+      commit(CHANGECLIENTHEIGHT, payload)
+    }
   }
-})
+}

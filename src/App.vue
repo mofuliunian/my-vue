@@ -1,5 +1,9 @@
 <template>
-  <div id="app">
+  <div id="app" ref="app">
+    <div class="scroll-progress" :style="`width: ${scrollProgressWidth}`"></div>
+    <!--<div class="fs" ref="fs">-->
+      <!--<div class="fsn"></div>-->
+    <!--</div>-->
     <!--<div id="nav">-->
       <!--<router-link to="/">Home</router-link> |-->
       <!--<router-link to="/about">About</router-link>-->
@@ -13,16 +17,36 @@
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios'
+import { mapState } from 'vuex'
 export default {
   name: 'app',
   data () {
-    return {}
+    return {
+      boxHeight: 0,
+      scrollTop: 0,
+      browserHeight: document.body.clientHeight,
+      scrollProgressWidth: '0%'
+    }
+  },
+  computed: {
+    ...mapState({
+      clientHeight: state => state.app.clientHeight
+    })
+  },
+  watch: {
+    clientHeight: function (val) {
+      this.boxHeight = val
+    }
   },
   mounted () {
-    loadlive2d('live2d', 'path/to/model.json')
-    axios.post('/api/my').then(res => {
-      console.log(res)
+    // loadlive2d('live2d', 'path/to/model.json')
+    window.addEventListener('scroll', (e) => {
+      this.scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+      this.scrollProgressWidth = this.scrollTop / (this.boxHeight - this.browserHeight) * 100 + '%'
+      if (this.scrollTop === 0) {
+        this.scrollProgressWidth = '0%'
+      }
     })
   }
 }
@@ -44,13 +68,15 @@ html,body{
   background-color: #F5F5F5;
 }
 
-/*定义滚动条轨道 内阴影+圆角*/
-/*::-webkit-scrollbar-track*/
-/*{*/
-  /*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);*/
-  /*border-radius: 3px;*/
-  /*background-color: #F5F5F5;*/
-/*}*/
+.scroll-progress {
+  height: 3px;
+  width: 0;
+  background: orange;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
 
 /*定义滑块 内阴影+圆角*/
 ::-webkit-scrollbar-thumb

@@ -1,5 +1,5 @@
 <template>
-    <div class="dashboard">
+    <div class="dashboard" ref="dashboard">
         <div class="picBox" :style="`width: 100%; height: ${clientHeight}px`">
             <div class="mark"></div>
         </div>
@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   name: 'dashboard',
   data () {
@@ -20,7 +21,18 @@ export default {
     }
   },
   mounted () {
-    this.clientHeight = document.body.clientHeight;
+    this.clientHeight = document.body.clientHeight
+    setTimeout(() => {
+      // console.log(this.$refs.dashboard.offsetHeight, this.$refs.dashboard.scrollHeight)
+      this.changeClientHeight({
+        payload: {
+          clientHeight: this.$refs.dashboard.offsetHeight
+        }
+      })
+    }, 200)
+  },
+  methods: {
+    ...mapActions(['changeClientHeight'])
   }
 }
 </script>
