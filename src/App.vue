@@ -52,7 +52,7 @@ export default {
     window.addEventListener('scroll', (e) => {
       this.scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
       if (this.scrollTop >= this.browserHeight / 2) {
-        this.backTop = '-160px'
+        this.backTop = '-460px'
       } else {
         this.backTop = '-960px'
       }
