@@ -40,16 +40,8 @@ export default {
           clearInterval(timer)
         }
       }, 30)
-    }
-  },
-  watch: {
-    clientHeight: function (val) {
-      this.boxHeight = val
-    }
-  },
-  mounted () {
-    loadlive2d('live2d', 'path/to/model.json')
-    window.addEventListener('scroll', (e) => {
+    },
+    scorll () {
       this.scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
       if (this.scrollTop >= this.browserHeight / 2) {
         this.backTop = '-460px'
@@ -60,7 +52,21 @@ export default {
       if (this.scrollTop === 0) {
         this.scrollProgressWidth = '0%'
       }
+    }
+  },
+  watch: {
+    clientHeight: function (val) {
+      this.boxHeight = val
+    }
+  },
+  mounted () {
+    loadlive2d('live2d', 'path/to/model.json')
+    window.addEventListener('scroll', () => {
+      this.scorll()
     })
+    setTimeout(() => {
+      this.scorll()
+    }, 300)
   }
 }
 </script>
