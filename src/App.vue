@@ -58,7 +58,7 @@
 
 <script>
 // import axios from 'axios'
-import '../public/font_898297_8suwilf7nuy/iconfont.css'
+import '../public/font/iconfont.css'
 import { mapState } from 'vuex'
 export default {
   name: 'app',
