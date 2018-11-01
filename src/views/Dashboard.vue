@@ -52,6 +52,8 @@ export default {
       } else if (domain === 'google') {
         this.helloText = 'Hello! 来自 谷歌搜索 的朋友!<br>欢迎阅读<span style="color:#0099cc;">『' + document.title.split(' - ')[0] + '』</span>'
       }
+    } else {
+      this.helloText = 'Hello! 通过网址而来的朋友!'
     }
     this.$refs.h3Title.innerHTML = this.helloText
   },
