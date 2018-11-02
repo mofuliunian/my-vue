@@ -1,58 +1,10 @@
 <template>
   <div id="app" ref="app">
-    <div class="scroll-progress" :style="`width: ${scrollProgressWidth}`"></div>
+    <Progress :scrollProgressWidth="scrollProgressWidth" />
     <div class="back-to-top" @click="goToTop" :style="`top: ${backTop}`"></div>
-    <header :class="scrollTop === 0 ? '' : 'header-no-top'">
-      <div class="header-left">
-        logo
-      </div>
-      <ul class="header-right">
-        <li class="">
-          <router-link to="/">
-            <i class="iconfont icon-shouye"></i>
-            <span>Home</span>
-          </router-link>
-        </li>
-        <li>
-          <router-link to="/">
-            <i class="iconfont icon-boke"></i>
-            <span>Blog</span>
-          </router-link>
-        </li>
-        <li>
-          <router-link to="/">
-            <i class="iconfont icon-archive"></i>
-            <span>Archive</span>
-          </router-link>
-        </li>
-        <li>
-          <router-link to="/">
-            <i class="iconfont icon-yinle"></i>
-            <span>Music</span>
-          </router-link>
-        </li>
-        <li>
-          <router-link to="/">
-            <i class="iconfont icon-APP"></i>
-            <span>Apps</span>
-          </router-link>
-        </li>
-        <li>
-          <router-link to="/">
-            <i class="iconfont icon-gerenjianli"></i>
-            <span>CV</span>
-          </router-link>
-        </li>
-        <li class="search">
-          <i class="iconfont icon-sousuo1"></i>
-        </li>
-      </ul>
-    </header>
+    <Headers :scrollTop="scrollTop"/>
     <router-view/>
-    <div class="waifu">
-      <div class="waifu-tips"></div>
-      <canvas id="live2d" width="280" height="250" class="live2d"></canvas>
-    </div>
+    <Live2d/>
   </div>
 </template>
 
@@ -60,6 +12,9 @@
 // import axios from 'axios'
 import '../public/font/iconfont.css'
 import { mapState } from 'vuex'
+import Headers from './components/header'
+import Progress from './components/progress'
+import Live2d from './components/live2d'
 export default {
   name: 'app',
   data () {
@@ -107,13 +62,17 @@ export default {
     }
   },
   mounted () {
-    loadlive2d('live2d', 'path/to/model.json')
     window.addEventListener('scroll', () => {
       this.scorll()
     })
     setTimeout(() => {
       this.scorll()
     }, 400)
+  },
+  components: {
+    Headers,
+    Progress,
+    Live2d
   }
 }
 </script>
@@ -175,45 +134,5 @@ html,body{
   100% {
      transform: translateY(0);
    }
-}
-header{
-  height: 65px;
-  position: fixed;
-  width: 100%;
-  z-index: 999;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 30px;
-  box-sizing: border-box;
-  .header-left{
-  }
-  .header-right{
-    font: .8rem Ubuntu,sans-serif;
-    list-style: none;
-    display: flex;
-    align-items: center;
-    li{
-      padding: 0 12px;
-      a{
-        text-decoration: none;
-        color: #666;
-        font-size: 16px;
-        .iconfont{
-          display: inline-block;
-          padding-right: 6px;
-        }
-      }
-    }
-    .search .iconfont{
-      font-size: 22px;
-      color: #666;
-      cursor: pointer;
-    }
-  }
-}
-header:hover, .header-no-top{
-  background: hsla(0,0%,100%,.95);
-  transition: all .4s ease;
-  box-shadow: 0 1px 40px -8px rgba(0,0,0,.5);
 }
 </style>
